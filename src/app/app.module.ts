@@ -9,7 +9,6 @@ import { environment } from 'src/environments/environment';
 import { LoginModule } from './login/login.module';
 import { RegisterModule } from './register/register.module';
 import { DashboardModule } from './dashboard/dashboard.module';
-import { AuthenticationModule } from './authentication/authentication.module';
 
 @NgModule({
   declarations: [
