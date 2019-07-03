@@ -1,0 +1,13 @@
+{
+    "editor.wordWrapColumn": 120,
+    "editor.formatOnSave": true,
+    "prettier.printWidth": 120,
+    "prettier.singleQuote": true,
+    "prettier.tabWidth": 4,
+    "prettier.trailingComma": "es5",
+    "html.format.wrapLineLength": 0,
+    "html.format.enable": false,
+    "[html]": {
+        "editor.formatOnSave": false
+    }
+}
