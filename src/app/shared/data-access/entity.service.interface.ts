@@ -16,7 +16,7 @@ export abstract class EntityService<T extends Entity> implements IEntityService<
         this.storeName = storeName;
     }
 
-    abstract get(id: string): T;
+    abstract get(id: string): Promise<T>;
     abstract getAsync(id: string): Observable<T>;
     abstract add(entity: T): Promise<void>;
     abstract update(updatedEntity: T): Promise<void>;
