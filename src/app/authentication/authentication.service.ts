@@ -1,51 +1,54 @@
-import { Injectable, OnDestroy } from "@angular/core";
-
+import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { auth } from "firebase/app";
 import { AngularFireAuth } from "@angular/fire/auth";
+import { timer } from "rxjs";
+import * as firebaseui from "firebaseui";
+import * as firebase from "firebase";
 import { User } from "firebase";
-import { Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: "root"
 })
-export class AuthenticationService implements OnDestroy{
+export class AuthenticationService {
   public user: User;
 
-  private authStateSubscription: Subscription;
+  constructor(public angularFireAuth: AngularFireAuth, public router: Router) {}
 
-  constructor(public angularFireAuth: AngularFireAuth, public router: Router) {
-    this.authStateSubscription = this.angularFireAuth.authState.subscribe(user => {
+  createLoginUi(
+    element: string,
+    firebaseUiConfig: firebaseui.auth.Config,
+    authUi: firebaseui.auth.AuthUI
+  ) {
+    firebase.auth().onAuthStateChanged(async function(user) {
       if (user) {
-        this.user = user;
-        localStorage.setItem("user", JSON.stringify(this.user));
+        // reset ui so it can re-render on log out
+        authUi.reset();
       } else {
-        localStorage.setItem("user", null);
+        await timer(1000).toPromise();
+        // No user signed in, render sign-in UI.
+        authUi.start(element, firebaseUiConfig);
       }
     });
   }
 
-  ngOnDestroy(): void {
-    this.authStateSubscription.unsubscribe();
-  }
-
-  async login(email: string, password: string) {
-    try {
-      await this.angularFireAuth.auth.signInWithEmailAndPassword(email, password);
-      this.router.navigate(["dashboard"]);
-    } catch (e) {
-      alert("Error!" + e.message);
-    }
+  async login(user) {
+    this.user = user;
+    localStorage.setItem("user", JSON.stringify(user));
+    this.router.navigate(["dashboard"]);
   }
 
   async logout() {
-    await this.angularFireAuth.auth.signOut();
-    localStorage.removeItem("user");
-    this.router.navigate(["login"]);
+    try {
+      await this.angularFireAuth.auth.signOut();
+      localStorage.removeItem("user");
+      this.router.navigate(["login"]);
+    } catch (error) {
+      console.error("Failed to log out", error);
+    }
   }
 
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem("user"));
-    return user !== null;
+    return user === null ? false : true;
   }
 }
