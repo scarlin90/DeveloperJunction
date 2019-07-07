@@ -2,7 +2,7 @@ import { Entity } from './entity.interface';
 import { Observable } from 'rxjs';
 
 export interface IEntityService<T extends Entity> {
-    get(id: string): T;
+    get(id: string): Promise<T>;
     getAsync(id: string): Observable<T>;
     add(entity: T): Promise<void>;
     update(updatedEntity: T): Promise<void>;

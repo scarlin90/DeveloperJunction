@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 
 import { AuthenticationService } from "../authentication/authentication.service";
 
@@ -7,6 +7,12 @@ import { AuthenticationService } from "../authentication/authentication.service"
   templateUrl: "./dashboard.component.html",
   styleUrls: ["./dashboard.component.scss"]
 })
-export class DashboardComponent {
-  constructor() {}
+export class DashboardComponent implements OnInit {
+  user: firebase.User;
+
+  constructor(public authService: AuthenticationService) {}
+
+  ngOnInit(): void {
+    this.user = this.authService.user;
+  }
 }
