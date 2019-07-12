@@ -7,9 +7,11 @@ import { Observable } from 'rxjs/internal/Observable';
 
 export abstract class FirebaseEntityService<T extends Entity> extends EntityService<T> {
     protected collection: AngularFirestoreCollection<T>;
+    protected afs: AngularFirestore;
 
-    constructor(name: string, private afs: AngularFirestore) {
+    constructor(name: string, afs: AngularFirestore) {
         super(name);
+        this.afs = afs;
         this.collection = this.afs.collection(name);
     }
 
