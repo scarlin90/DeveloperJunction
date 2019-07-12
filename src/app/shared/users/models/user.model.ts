@@ -4,6 +4,7 @@ export class User implements Entity {
     id: string;
     name: string;
     role: Role;
+    votedFor: string[]; // Array of IDs of which the user has given heat
 
     constructor(user?: Partial<User>) {
         if (!!user) {
