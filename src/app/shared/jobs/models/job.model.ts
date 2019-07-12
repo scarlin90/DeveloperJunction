@@ -10,6 +10,7 @@ export class Job implements Entity {
     salary: number;
     startDate: Date;
     heat: number; // How popular is the Job
+    tags: string[];
     created: Date;
     lastModified: Date;
 
