@@ -17,10 +17,10 @@
             <span class="count">4</span>
           </a>
         </li>
-        <li class="nav-item d-none d-xl-inline-block" (click)="authService.logout()">
+        <li class="nav-item d-none d-xl-inline-block" (click)="logout()">
           <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-            <span class="profile-text">Hello, firstname lastname!</span>
-            <!-- <img class="img-xs rounded-circle" [src]="loggedInUser.avatar" alt="Profile image"> -->
+            <span class="profile-text">Hello, {{user.displayName}}!</span>
+            <img class="img-xs rounded-circle" [src]="user.photoURL" alt="Profile image">
           </a>
         </li>
       </ul>
@@ -35,18 +35,18 @@
           <div class="nav-link">
             <div class="user-wrapper">
               <div class="profile-image">
-                <!-- <img [src]="loggedInUser.avatar" alt="profile image"> -->
+                <img [src]="user.photoURL" alt="profile image">
               </div>
               <div class="text-wrapper">
-                <p class="profile-name">First Last</p>
+                <p class="profile-name">{{user.displayName}}</p>
                 <div>
-                  <small class="designation text-muted">UserName</small>
+                  <small class="designation text-muted">{{user.email}}</small>
                   <span class="status-indicator online"></span>
                 </div>
               </div>
             </div>
-            <button class="btn btn-success btn-block blue">New Project
-              <i class="mdi mdi-plus"></i>
+            <button class="btn btn-success btn-block blue">Add Job
+              <i class="fas fa-plus"></i>
             </button>
           </div>
         </li>
