@@ -4,13 +4,20 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { timer, of } from 'rxjs';
 import * as firebaseui from 'firebaseui';
 import * as firebase from 'firebase';
-import { User } from 'firebase';
+import { User as FirebaseUser } from 'firebase';
+import { UserService } from '../shared/users/user.service';
+import { User } from '../shared/users/models/user.model';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthenticationService {
-    constructor(public angularFireAuth: AngularFireAuth, public router: Router, private zone: NgZone) {}
+    constructor(
+        public angularFireAuth: AngularFireAuth,
+        public router: Router,
+        private zone: NgZone,
+        private readonly userService: UserService
+    ) {}
 
     createLoginUi(element: string, firebaseUiConfig: firebaseui.auth.Config, authUi: firebaseui.auth.AuthUI) {
         firebase.auth().onAuthStateChanged(async () => {
@@ -25,8 +32,9 @@ export class AuthenticationService {
         });
     }
 
-    async login(userDetails) {
+    async login(userDetails: FirebaseUser) {
         localStorage.setItem('user', JSON.stringify(userDetails));
+        this.fetchOrCreateUser(userDetails);
         this.zone.run(() => {
             this.router.navigate(['dashboard']);
         });
@@ -43,11 +51,28 @@ export class AuthenticationService {
     }
 
     get isLoggedIn(): boolean {
-        const user = JSON.parse(localStorage.getItem('user'));
+        const user = JSON.parse(localStorage.getItem('user')) as FirebaseUser;
         return user === null ? false : true;
     }
 
-    get user(): User {
+    get user(): FirebaseUser {
         return JSON.parse(localStorage.getItem('user'));
+    }
+
+    private async fetchOrCreateUser(loggedInUser: FirebaseUser) {
+        let user = await this.userService.get(loggedInUser.uid);
+        if (!user) {
+            user = await this.userService.add(
+                new User({
+                    id: loggedInUser.uid,
+                    name: loggedInUser.displayName,
+                    role: 'Normal',
+                    votedFor: []
+                }),
+                loggedInUser.uid
+            );
+        }
+
+        this.userService.currentUser = user;
     }
 }

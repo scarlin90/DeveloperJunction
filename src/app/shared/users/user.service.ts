@@ -7,7 +7,18 @@ import { AngularFirestore } from '@angular/fire/firestore';
     providedIn: 'root'
 })
 export class UserService extends FirebaseEntityService<User> {
+    // tslint:disable-next-line:variable-name
+    private _currentUser: User;
+
     constructor(protected afs: AngularFirestore) {
         super('users', afs);
+    }
+
+    get currentUser() {
+        return this._currentUser;
+    }
+
+    set currentUser(user: User) {
+        this._currentUser = user;
     }
 }
