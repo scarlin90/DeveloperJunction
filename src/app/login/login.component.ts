@@ -18,7 +18,10 @@ export class LoginComponent implements OnInit {
             signInOptions: [
                 firebase.auth.GoogleAuthProvider.PROVIDER_ID,
                 firebase.auth.EmailAuthProvider.PROVIDER_ID,
-                firebase.auth.GithubAuthProvider.PROVIDER_ID
+                {
+                    provider: firebase.auth.GithubAuthProvider.PROVIDER_ID,
+                    scopes: ['user']
+                }
             ],
             callbacks: {
                 signInSuccessWithAuthResult: this.onLoginSuccessful.bind(this)
