@@ -1,0 +1,40 @@
+<div class="alert alert-success" role="alert" *ngIf="showSuccessMessage">
+    <small>Added <strong>{{ companyFormModel.value.name }}</strong> to the list of companies.</small>
+</div>
+
+<div [formGroup]="companyFormModel.form" class="text-left">
+  <app-input [inputModel]="companyFormModel.name">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="E.g. SmashFly"
+      [formControlName]="companyFormModel.name.inputKey"
+      input-field>
+  </app-input>
+
+  <img *ngIf="companyFormModel.value && companyFormModel.value.logo" [src]="companyFormModel.value.logo" width="75" height="75">
+  <app-input [inputModel]="companyFormModel.logo">
+    <input
+      type="file"
+      accept="image/*"
+      class="form-control"
+      (change)="setTemporaryFile($event.target.files[0])"
+      [formControlName]="companyFormModel.logo.inputKey"
+      input-field>
+  </app-input>
+
+  <app-input [inputModel]="companyFormModel.description">
+    <input
+      type="text"
+      class="form-control"
+      [formControlName]="companyFormModel.description.inputKey"
+      input-field>
+  </app-input>
+
+  <div class="text-right">
+      <button class="btn btn-outline-danger" [disabled]="!companyFormModel.form.touched" (click)="resetForm()">Reset</button>
+      &nbsp;&nbsp;
+      <button *ngIf="!companyFormModel.isEditing" class="btn btn-primary" [disabled]="!companyFormModel.form.valid" (click)="onAddClick()">Add</button>
+      <button *ngIf="companyFormModel.isEditing" class="btn btn-primary" [disabled]="!companyFormModel.form.valid" (click)="onEditClick()">Edit</button>
+  </div>
+</div>

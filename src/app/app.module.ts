@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
 import { LoginModule } from './login/login.module';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 @NgModule({
     declarations: [AppComponent],
     imports: [
@@ -16,6 +17,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
         AngularFireModule.initializeApp(environment.firebase),
         AngularFireAuthModule,
         AngularFirestoreModule,
+        AngularFireStorageModule,
         LoginModule
     ],
     providers: [],

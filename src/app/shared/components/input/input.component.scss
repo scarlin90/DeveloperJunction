@@ -1,0 +1,11 @@
+.error {
+    * {
+        color: #dc3545;
+    }
+}
+:host ::ng-deep .error {
+    input {
+        border-color: #dc3545 !important;
+        color: #dc3545;
+    }
+}
