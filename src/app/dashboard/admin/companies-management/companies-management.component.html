@@ -1,0 +1,22 @@
+
+<h4 class="text-center">Manage Companies</h4>
+
+<app-management-card>
+  <div list>
+    <app-company-listing
+      *ngFor="let company of companies$ | async as companies"
+      [company]="company"
+      (deleteCompany)="onDeleteCompany($event)"
+      (beginEditing)="onBeginEditingCompany($event)">
+    </app-company-listing>
+    <div *ngIf="(companies$ | async)?.length === 0">
+      <h5>There are currently no companies listed.</h5>
+    </div>
+  </div>
+  <div edit>
+      <app-add-company [companyFormModel]="companyFormModel" (addCompany)="onAddCompany($event)" (editCompany)="onEditCompany($event)"></app-add-company>
+  </div>
+  <div add>
+      <app-add-company [companyFormModel]="companyFormModel" (addCompany)="onAddCompany($event)"></app-add-company>
+  </div>
+</app-management-card>

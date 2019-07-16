@@ -5,7 +5,13 @@ import { DashboardComponent } from './dashboard.component';
 const routes: Routes = [
     {
         path: '',
-        component: DashboardComponent
+        component: DashboardComponent,
+        children: [
+            {
+                path: 'admin',
+                loadChildren: './admin/admin.module#AdminModule'
+            }
+        ]
     }
 ];
 

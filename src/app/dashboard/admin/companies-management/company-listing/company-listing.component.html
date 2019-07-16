@@ -1,0 +1,18 @@
+<div class="company-listing border border-light">
+  <div class="row">
+    <div class="col-2 d-flex align-items-center justify-content-center">
+      <img *ngIf="company.logo" [src]="company.logo" width="50" heght="50">
+    </div>
+    <div class="col-8 d-flex align-items-center justify-content-center">
+      {{company.name}}
+    </div>
+    <div class="col-2 d-flex align-items-center justify-content-around actions">
+      <span class="text-primary" (click)="beginEdit()">
+          <i class="fa fa-edit"></i>
+      </span>
+      <span class="text-danger" (click)="clickRemoveCompany()">
+          <i class="fa fa-times"></i>
+      </span>
+    </div>
+  </div>
+</div>

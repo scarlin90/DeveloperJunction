@@ -1,0 +1,37 @@
+<div class="card text-center border border-dark">
+    <div class="card-header">
+      <ul class="nav nav-tabs card-header-tabs">
+
+        <li class="nav-item"
+          (click)="switchTab(ManagementTabState.List)">
+          <a class="nav-link" [class.active]="tabState === ManagementTabState.List">All</a>
+        </li>
+
+        <li class="nav-item"
+          *ngIf="tabState === ManagementTabState.Edit"
+          (click)="switchTab(ManagementTabState.Edit)">
+          <a class="nav-link" [class.active]="tabState === ManagementTabState.Edit">Edit</a>
+        </li>
+
+        <li class="nav-item"
+          (click)="switchTab(ManagementTabState.Create)">
+          <a class="nav-link" [class.active]="tabState === ManagementTabState.Create">Add New</a>
+        </li>
+      </ul>
+    </div>
+    <div class="card-body">
+
+      <div *ngIf="tabState === ManagementTabState.List">
+        <ng-content select="[list]"></ng-content>
+      </div>
+
+      <div *ngIf="tabState === ManagementTabState.Edit">
+        <ng-content select="[edit]"></ng-content>
+      </div>
+
+      <div *ngIf="tabState === ManagementTabState.Create">
+        <ng-content select="[add]"></ng-content>
+      </div>
+
+    </div>
+  </div>

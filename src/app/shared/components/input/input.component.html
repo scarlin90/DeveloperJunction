@@ -1,0 +1,11 @@
+<div class="form-group" [class.error]="inputModel.currentError">
+  <label *ngIf="inputModel.label" >{{ inputModel.label }}</label>
+  <span [class.error]="inputModel.currentError">
+    <ng-content select="[input-field]"></ng-content>
+  </span>
+  <small
+    *ngIf="inputModel.currentError"
+    class="form-text">
+      {{inputModel.currentError}}
+  </small>
+</div>

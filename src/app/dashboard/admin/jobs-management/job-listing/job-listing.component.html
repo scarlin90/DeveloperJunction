@@ -1,0 +1,35 @@
+<div class="job-listing border border-light">
+  <div class="row">
+    <div class="col-2 d-flex align-items-center justify-content-center">
+      <img *ngIf="company?.logo" [src]="company?.logo" width="50" heght="50">
+    </div>
+    <div class="col-8">
+      <div class="row">
+        <div class="col-12 text-center">
+            <small>{{company?.name}}</small><br>
+            <strong>{{job.title}}</strong>
+        </div>
+      </div>
+      <br>
+      <div class="row extra-info">
+          <div class="col-4">
+              {{job.salary | currency:'GBP':'symbol-narrow'}}
+          </div>
+          <div class="col-4">
+              {{job.type}}
+          </div>
+          <div class="col-4">
+              {{job.hours}}
+          </div>
+      </div>
+    </div>
+    <div class="col-2 d-flex align-items-center justify-content-around actions">
+      <span class="text-primary" (click)="beginEdit()">
+          <i class="fa fa-edit"></i>
+      </span>
+      <span class="text-danger" (click)="clickRemoveJob()">
+          <i class="fa fa-times"></i>
+      </span>
+    </div>
+  </div>
+</div>

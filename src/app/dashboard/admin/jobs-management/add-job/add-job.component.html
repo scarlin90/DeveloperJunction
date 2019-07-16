@@ -1,0 +1,109 @@
+<div class="alert alert-success" role="alert" *ngIf="showSuccessMessage">
+  <small>Added <strong>{{ jobViewModel.value.title }}</strong> to the list of jobs.</small>
+</div>
+
+<div [formGroup]="jobViewModel.form" class="text-left">
+
+  <div class="row">
+    <div class="col">
+        <app-input [inputModel]="jobViewModel.company">
+          <select
+            type="dropdown"
+            class="form-control"
+            [formControlName]="jobViewModel.company.inputKey"
+            input-field>
+            <option value="" selected disabled hidden>Choose...</option>
+            <option *ngFor="let company of jobViewModel.companies$ | async" [value]="company.id">{{company.name}}</option>
+          </select>
+        </app-input>
+    </div>
+    <div class="col">
+        <app-input [inputModel]="jobViewModel.title">
+          <input
+            type="text"
+            class="form-control"
+            [formControlName]="jobViewModel.title.inputKey"
+            input-field>
+        </app-input>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+        <app-input [inputModel]="jobViewModel.type">
+            <select
+              type="dropdown"
+              class="form-control"
+              placeholder="Choose..."
+              [formControlName]="jobViewModel.type.inputKey"
+              input-field>
+              <option value="" selected disabled hidden>Choose...</option>
+              <option value="Full Time">Full Time</option>
+              <option value="Part Time">Part Time</option>
+              <option value="Temporary">Temporary</option>
+            </select>
+          </app-input>
+    </div>
+    <div class="col">
+        <app-input [inputModel]="jobViewModel.salary">
+          <div class="input-group" input-field>
+              <div class="input-group-prepend">
+                  <span class="input-group-text">£</span>
+              </div>
+              <input
+                type="number"
+                class="form-control"
+                [formControlName]="jobViewModel.salary.inputKey">
+          </div>
+          </app-input>
+      </div>
+  </div>
+
+  <app-input [inputModel]="jobViewModel.description">
+    <textarea
+      type="text"
+      class="form-control"
+      [formControlName]="jobViewModel.description.inputKey"
+      input-field></textarea>
+  </app-input>
+
+  <div class="row">
+    <div class="col">
+        <app-input [inputModel]="jobViewModel.startDate">
+            <div class="input-group" input-field>
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-calendar-alt"></i></span>
+                </div>
+                <input
+                  type="date"
+                  class="form-control"
+                  [formControlName]="jobViewModel.startDate.inputKey">
+            </div>
+        </app-input>
+    </div>
+    <div class="col">
+        <app-input [inputModel]="jobViewModel.hours">
+          <input
+            type="text"
+            class="form-control"
+            [formControlName]="jobViewModel.hours.inputKey"
+            input-field>
+        </app-input>
+    </div>
+  </div>
+
+  <app-input [inputModel]="jobViewModel.tags">
+    <input
+      type="text"
+      class="form-control"
+      [formControlName]="jobViewModel.tags.inputKey"
+      input-field>
+  </app-input>
+
+<div class="text-right">
+    <button class="btn btn-outline-danger" [disabled]="!jobViewModel.form.touched" (click)="resetForm()">Reset</button>
+    &nbsp;&nbsp;
+    <button *ngIf="!jobViewModel.isEditing" class="btn btn-primary" [disabled]="!jobViewModel.form.valid" (click)="onAddClick()">Add</button>
+    <button *ngIf="jobViewModel.isEditing" class="btn btn-primary" [disabled]="!jobViewModel.form.valid" (click)="onEditClick()">Edit</button>
+</div>
+</div>

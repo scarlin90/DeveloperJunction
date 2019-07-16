@@ -66,6 +66,8 @@ export class AuthenticationService {
                 new User({
                     id: loggedInUser.uid,
                     name: loggedInUser.displayName,
+                    email: loggedInUser.email,
+                    profilePicUrl: loggedInUser.photoURL,
                     role: 'Normal',
                     votedFor: []
                 }),

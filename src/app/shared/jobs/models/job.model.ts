@@ -6,7 +6,7 @@ export class Job implements Entity {
     title: string;
     type: JobType;
     description: string;
-    hours: number;
+    hours: string;
     salary: number;
     startDate: Date;
     heat: number; // How popular is the Job

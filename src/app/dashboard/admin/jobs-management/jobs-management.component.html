@@ -1,0 +1,22 @@
+
+<h4 class="text-center">Manage Jobs</h4>
+
+<app-management-card>
+  <div list>
+    <app-job-listing
+      *ngFor="let job of jobs$ | async as jobs"
+      [job]="job"
+      (deleteJob)="onDeleteJob($event)"
+      (beginEditing)="onBeginEditingJob($event)">
+    </app-job-listing>
+    <div *ngIf="(jobs$ | async)?.length === 0">
+      <h5>There are currently no jobs listed.</h5>
+    </div>
+  </div>
+  <div edit>
+      <app-add-job [jobViewModel]="jobViewModel" (addJob)="onAddJob($event)" (editJob)="onEditJob($event)"></app-add-job>
+  </div>
+  <div add>
+      <app-add-job [jobViewModel]="jobViewModel" (addJob)="onAddJob($event)"></app-add-job>
+  </div>
+</app-management-card>
