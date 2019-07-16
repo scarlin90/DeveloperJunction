@@ -47,7 +47,8 @@ export class AddCompanyComponent implements OnInit {
             logo: await this.uploadNewLogo(),
             description: this.companyFormModel.form.get(this.companyFormModel.description.inputKey).value,
             created: this.companyFormModel.value.created,
-            lastModified: new Date()
+            lastModified: new Date(),
+            heat: 0
         });
 
         this.editCompany.emit(company);

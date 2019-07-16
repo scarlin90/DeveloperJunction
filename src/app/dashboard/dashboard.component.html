@@ -45,8 +45,12 @@
                 </div>
               </div>
             </div>
-            <button class="btn btn-success btn-block blue">Add Job
-              <i class="fas fa-plus"></i>
+            <button
+              *ngIf="user.role === 'Admin'"
+              routerLink="/dashboard/admin"
+              class="btn btn-success btn-block blue">
+                Add Job
+                <i class="fas fa-plus"></i>
             </button>
           </div>
         </li>
@@ -56,9 +60,9 @@
               <span class="menu-title" >Dashboard</span>
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="user.role === 'Admin'">
           <a class="nav-link" routerLink="admin" routerLinkActive="active">
-            <i class="fas fa-columns"></i>&nbsp;&nbsp;
+            <i class="fas fa-tools"></i>&nbsp;&nbsp;
             <span class="menu-title" >Admin</span>
           </a>
         </li>
