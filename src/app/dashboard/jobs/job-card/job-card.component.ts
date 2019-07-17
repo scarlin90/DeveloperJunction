@@ -14,17 +14,9 @@ import { User } from 'src/app/shared/users/models/user.model';
 export class JobCardComponent implements OnInit {
     @Input() job: Job;
 
-    company: Company;
+    constructor(private readonly jobService: JobService, private readonly userService: UserService) {}
 
-    constructor(
-        private readonly companyService: CompanyService,
-        private readonly jobService: JobService,
-        private readonly userService: UserService
-    ) {}
-
-    async ngOnInit() {
-        this.company = await this.companyService.get(this.job.companyId);
-    }
+    async ngOnInit() {}
 
     hasUserVoted() {
         return this.userService.currentUser.votedFor.includes(this.job.id);
