@@ -1,0 +1,80 @@
+<div class="card">
+  <div class="card-body">
+    <!-- Job Short Details-->
+    <div class="row">
+
+      <div class="col-4">
+        <img [src]="company?.logo" width="100">
+      </div>
+
+      <div class="col-8 col-offset-1">
+        <div class="row">
+          <div class="col-12">
+            <div class="heat-count text-right">
+                <i class="fas fa-fire"></i> {{job.heat}}
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+              <h6>{{company?.name}}</h6>
+              <h4>{{job.title}}</h4>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <hr>
+    <!-- Job Details -->
+    <div class="row job-details">
+
+      <div class="col-4">
+        {{job.salary | currency:'GBP':'symbol-narrow'}}
+      </div>
+
+      <div class="col-4">
+        {{job.type}}
+      </div>
+
+      <div class="col-4">
+        {{job.hours}}
+      </div>
+
+    </div>
+
+    <!-- Job Description -->
+    <div class="row job-description">
+      <div class="col">
+        {{job.description}}
+      </div>
+    </div>
+
+    <!-- Footer - Job Actions-->
+    <div class="row">
+
+      <div class="col-9">
+        <span
+          *ngFor="let tag of job.tags"
+          class="tag">
+          #{{ tag }}
+        </span>
+      </div>
+
+      <div
+        class="col-3 d-flex align-items-center justify-content-around"
+        [class.voted]="hasUserVoted()">
+        <i
+          class="fas fa-arrow-alt-circle-up vote"
+          (click)="voteUp()">
+        </i>
+        <i class="fas fa-fire heatIcon"></i>
+        <i
+          class="fas fa-arrow-alt-circle-down vote"
+          (click)="voteDown()">
+        </i>
+      </div>
+
+    </div>
+
+  </div>
+</div>

@@ -34,7 +34,7 @@ export class AuthenticationService {
 
     async login(userDetails: FirebaseUser) {
         localStorage.setItem('user', JSON.stringify(userDetails));
-        this.fetchOrCreateUser(userDetails);
+        await this.fetchOrCreateUser(userDetails);
         this.zone.run(() => {
             this.router.navigate(['dashboard']);
         });

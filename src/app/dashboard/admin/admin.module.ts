@@ -20,7 +20,16 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    declarations: [AdminComponent, CompaniesManagementComponent, ManagementCardComponent, AddCompanyComponent, CompanyListingComponent, JobsManagementComponent, AddJobComponent, JobListingComponent],
+    declarations: [
+        AdminComponent,
+        CompaniesManagementComponent,
+        ManagementCardComponent,
+        AddCompanyComponent,
+        CompanyListingComponent,
+        JobsManagementComponent,
+        AddJobComponent,
+        JobListingComponent
+    ],
     imports: [CommonModule, RouterModule.forChild(routes), ReactiveFormsModule, ComponentsModule]
 })
 export class AdminModule {}
