@@ -1,0 +1,8 @@
+<h3>
+  Available Jobs<br>
+  <small>Jobs are sorted based on popularity</small>
+</h3>
+<hr>
+<div class="card-deck">
+  <app-job-card *ngFor="let job of jobs$ | async" [job]="job"></app-job-card>
+</div>
